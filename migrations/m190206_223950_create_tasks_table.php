@@ -18,7 +18,8 @@ class m190206_223950_create_tasks_table extends Migration
             'description' => $this->string(),
             'creator_id' => $this->integer(),
             'executor_id' => $this->integer(),
-            'due_date' => $this->date()
+            'due_date' => $this->date(),
+            'status_id' => $this->integer()
         ]);
     }
 

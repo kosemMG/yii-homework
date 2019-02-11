@@ -13,9 +13,10 @@ class TaskController extends Controller
         $model = new Tasks([
             'title' => 'Task tracker',
             'description' => 'Bla-bla-bla',
-            'creator_id' => 'David',
-            'executor_id' => 'Moshe',
-            'due_date' => '2019-02-15'
+            'creator_id' => 1,
+            'executor_id' => 2,
+            'due_date' => '2019-02-15',
+            'status_id' => 1
         ]);
     }
 }

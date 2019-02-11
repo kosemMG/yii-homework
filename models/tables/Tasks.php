@@ -15,6 +15,10 @@ use yii\db\ActiveRecord;
  * @property int $creator_id
  * @property int $executor_id
  * @property string $due_date
+ * @property int $status_id
+ * @property TaskStatuses $status
+ * @property Users $creator
+ * @property Users $executor
  */
 class Tasks extends ActiveRecord
 {
@@ -33,7 +37,7 @@ class Tasks extends ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['creator_id', 'executor_id'], 'integer'],
+            [['creator_id', 'executor_id', 'status_id'], 'integer'],
             [['due_date'], DateValidator::class],
             [['title'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 255],
@@ -52,6 +56,31 @@ class Tasks extends ActiveRecord
             'creator_id' => 'Creator ID',
             'executor_id' => 'Executor ID',
             'due_date' => 'Due Date',
+            'status_id' => 'Status ID'
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(TaskStatuses::class, ['id' => 'status_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreator()
+    {
+        return $this->hasOne(Users::class, ['id' => 'creator_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExecutor()
+    {
+        return $this->hasOne(Users::class, ['id' => 'executor_id']);
     }
 }
