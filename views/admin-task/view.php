@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'creator_id',
             'executor_id',
             'due_date',
+            'status_id',
         ],
     ]) ?>
 
