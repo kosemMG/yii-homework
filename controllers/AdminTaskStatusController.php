@@ -2,19 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\tables\Users;
 use Yii;
-use app\models\tables\Tasks;
 use app\models\tables\TaskStatuses;
-use app\models\filters\TaskSearch;
+use app\models\filters\TaskStatusSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AdminTaskController implements the CRUD actions for Tasks model.
+ * AdminTaskStatusController implements the CRUD actions for TaskStatuses model.
  */
-class AdminTaskController extends Controller
+class AdminTaskStatusController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,12 +30,12 @@ class AdminTaskController extends Controller
     }
 
     /**
-     * Lists all Tasks models.
+     * Lists all TaskStatuses models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TaskSearch();
+        $searchModel = new TaskStatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class AdminTaskController extends Controller
     }
 
     /**
-     * Displays a single Tasks model.
+     * Displays a single TaskStatuses model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,13 +58,13 @@ class AdminTaskController extends Controller
     }
 
     /**
-     * Creates a new Tasks model.
+     * Creates a new TaskStatuses model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Tasks();
+        $model = new TaskStatuses();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -74,13 +72,11 @@ class AdminTaskController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'items' => $this->getTaskStatuses(),
-            'users' => $this->getUsers()
         ]);
     }
 
     /**
-     * Updates an existing Tasks model.
+     * Updates an existing TaskStatuses model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,29 +92,11 @@ class AdminTaskController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'items' => $this->getTaskStatuses(),
-            'users' => $this->getUsers()
         ]);
     }
 
-    private function getTaskStatuses()
-    {
-        return TaskStatuses::find()
-            ->select(['name'])
-            ->indexBy('id')
-            ->column();
-    }
-
-    private function getUsers()
-    {
-        return Users::find()
-            ->select(['name'])
-            ->indexBy('id')
-            ->column();
-    }
-
     /**
-     * Deletes an existing Tasks model.
+     * Deletes an existing TaskStatuses model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -132,15 +110,15 @@ class AdminTaskController extends Controller
     }
 
     /**
-     * Finds the Tasks model based on its primary key value.
+     * Finds the TaskStatuses model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Tasks the loaded model
+     * @return TaskStatuses the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Tasks::findOne($id)) !== null) {
+        if (($model = TaskStatuses::findOne($id)) !== null) {
             return $model;
         }
 
