@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\tables\Tasks;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -63,18 +61,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index', [
-            'dataProvider' => $this->getDataProvider()
-        ]);
-    }
-
-    private function getDataProvider()
-    {
-        $query = Tasks::find();
-
-        return new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        return $this->render('index');
     }
 
     /**
