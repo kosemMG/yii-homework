@@ -2,7 +2,9 @@
 
 namespace app\models\tables;
 
-use Yii;
+
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "task_statuses".
@@ -49,5 +51,18 @@ class TaskStatuses extends \yii\db\ActiveRecord
     public function getTasks()
     {
         return $this->hasMany(Tasks::className(), ['status_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'value' => new Expression('NOW()'),
+            ],
+        ];
     }
 }
