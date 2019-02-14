@@ -18,13 +18,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'creator')->dropDownList($users, ['prompt' => 'Select Creator']) ?>
+    <?= $form->field($model, 'creator_id')->dropDownList($users, ['prompt' => 'Select Creator']) ?>
 
-    <?= $form->field($model, 'executor')->dropDownList($users, ['prompt' => 'Select Executor']) ?>
+    <?= $form->field($model, 'executor_id')->dropDownList($users, ['prompt' => 'Select Executor']) ?>
 
     <?= $form->field($model, 'due_date')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList($items, ['prompt' => 'Select Status']) ?>
+    <?= $form->field($model, 'status_id')->dropDownList($items, ['prompt' => 'Select Status']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
