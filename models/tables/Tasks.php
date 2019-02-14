@@ -4,7 +4,9 @@ namespace app\models\tables;
 
 use app\validators\DateValidator;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "tasks".
@@ -57,6 +59,19 @@ class Tasks extends ActiveRecord
             'executor_id' => 'Executor ID',
             'due_date' => 'Due Date',
             'status_id' => 'Status ID'
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
