@@ -101,6 +101,9 @@ class AdminTaskController extends Controller
         ]);
     }
 
+    /**
+     * @return array
+     */
     private function getTaskStatuses()
     {
         return TaskStatuses::find()
@@ -109,6 +112,9 @@ class AdminTaskController extends Controller
             ->column();
     }
 
+    /**
+     * @return array
+     */
     private function getUsers()
     {
         return Users::find()
