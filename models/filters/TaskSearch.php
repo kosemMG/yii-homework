@@ -46,9 +46,9 @@ class TaskSearch extends Tasks
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
+            /*'pagination' => [
                 'pageSize' => 2
-            ]
+            ]*/
         ]);
 
         $this->load($params);

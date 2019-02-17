@@ -9,7 +9,7 @@ $config = [
     'bootstrap' => ['log', 'taskMessenger'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -17,7 +17,14 @@ $config = [
             'cookieValidationKey' => 'kGRHh2wOCzrJoGmcLJ2_GrXFYuscpZuO',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+//            'class' => 'yii\caching\FileCache',
+            'class' => \yii\redis\Cache::class,
+        ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '127.0.0.1',
+            'port' => 6379,
+            'database' => 0
         ],
         'user' => [
             'identityClass' => 'app\models\User',

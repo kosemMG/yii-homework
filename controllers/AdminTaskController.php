@@ -7,6 +7,7 @@ use Yii;
 use app\models\tables\Tasks;
 use app\models\tables\TaskStatuses;
 use app\models\filters\TaskSearch;
+use yii\filters\PageCache;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,6 +29,12 @@ class AdminTaskController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            /*'pageCache' => [
+                'class' => PageCache::class,
+                'only' => ['view'],
+                'duration' => 180,
+                'variations' => [$_GET['id']]
+            ]*/
         ];
     }
 
