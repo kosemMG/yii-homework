@@ -20,7 +20,7 @@ class TaskSearch extends Tasks
     {
         return [
             [['id', 'creator_id', 'executor_id', 'status_id'], 'integer'],
-            [['title', 'description', 'due_date'], 'safe'],
+            [['title', 'description', 'due_date', 'created'], 'safe'],
         ];
     }
 
@@ -70,23 +70,11 @@ class TaskSearch extends Tasks
             'status_id' => $this->status_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
 
-        $this->prepareQuery($query);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(["MONTH(`created_at`)" => $this->created]);
 
         return $dataProvider;
-    }
-
-    private function prepareQuery($query)
-    {
-        if (!empty($this->created)) {
-            foreach ($this->created as $monthNumber) {
-                $query->andFilterWhere(["MONTH(`created_at`)" => $monthNumber]);
-            }
-            return $query;
-        }
-
-        return false;
     }
 }
