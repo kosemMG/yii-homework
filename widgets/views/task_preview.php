@@ -2,8 +2,11 @@
 
 use yii\helpers\Url;
 
+
 /** @var $model \app\models\tables\Tasks */
 ?>
+
+
 
 <div class="task-container">
     <a class="task-preview-link" href="<?= Url::to(['task/one', 'id' => $model->id]) ?>">

@@ -21,6 +21,8 @@ use yii\db\Expression;
  * @property TaskStatuses $status
  * @property Users $creator
  * @property Users $executor
+ * @property \DateTime created_at
+ * @property \DateTime updated_at
  */
 class Tasks extends ActiveRecord
 {
