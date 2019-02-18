@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\HttpCache;
+use yii\filters\PageCache;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -35,6 +37,17 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+            'pageCache' => [
+                'class' => PageCache::class,
+                'only' => ['contact'],
+            ],
+            'httpCache' => [
+                'class' => HttpCache::class,
+                'only' => ['contact'],
+                'lastModified' => function () {
+                    return date('Y-m-d'); // для примера, пока ничего лучше нет
+                }
+            ]
         ];
     }
 
