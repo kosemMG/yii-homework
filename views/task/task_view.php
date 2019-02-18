@@ -9,8 +9,6 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = $model->title;
-
 $this->title = 'Update Tasks: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
@@ -28,7 +26,6 @@ $this->params['breadcrumbs'][] = 'Update';
         <?= $form->field($model, 'executor_id')->dropDownList($users, ['prompt' => 'Select Executor']) ?>
         <?= $form->field($model, 'status_id')->dropDownList($statuses, ['prompt' => 'Select Status']) ?>
     </div>
-
 
     <?= $form->field($model, 'due_date')->textInput() ?>
 

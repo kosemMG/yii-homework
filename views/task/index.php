@@ -8,6 +8,11 @@
 use yii\widgets\ListView;
 use app\widgets\TaskPreviewWidget;
 
+$this->title = 'Tasks';
+
+$this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'Find a Task';
+
 echo $this->render('_search', ['model' => $searchModel]);
 
 echo ListView::widget([

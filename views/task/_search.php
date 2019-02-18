@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \app\models\tables\Tasks $model;
+ * @var \app\models\tables\Tasks $model ;
  */
 
 use yii\widgets\ActiveForm;
@@ -32,7 +32,12 @@ $monthsList = [
     ]);
     ?>
 
-    <?= $form->field($model, 'created')->dropDownList($monthsList, ['prompt' => 'Choose Month',]); ?>
+    <?= $form->field($model, 'created_at_month')
+        ->dropDownList($monthsList, [
+            'prompt' => 'Choose Month',
+//            'class' => 'months-list'
+        ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

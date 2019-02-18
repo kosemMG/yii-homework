@@ -11,7 +11,7 @@ use app\models\tables\Tasks;
  */
 class TaskSearch extends Tasks
 {
-    public $created;
+    public $created_at_month;
 
     /**
      * {@inheritdoc}
@@ -20,7 +20,7 @@ class TaskSearch extends Tasks
     {
         return [
             [['id', 'creator_id', 'executor_id', 'status_id'], 'integer'],
-            [['title', 'description', 'due_date', 'created'], 'safe'],
+            [['title', 'description', 'due_date', 'created_at_month'], 'safe'],
         ];
     }
 
@@ -70,10 +70,9 @@ class TaskSearch extends Tasks
             'status_id' => $this->status_id,
         ]);
 
-
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(["MONTH(`created_at`)" => $this->created]);
+            ->andFilterWhere(["MONTH(`created_at`)" => $this->created_at_month]);
 
         return $dataProvider;
     }
