@@ -24,3 +24,18 @@
     border: 1px solid dimgray;
     padding: 12px;
 }
+
+.task {
+    box-sizing: border-box;
+    border: 1px solid #1e98a5;
+    border-radius: 10px;
+    background-color: #1e98a5;
+    padding: 15px 35px;
+    color: #fff;
+    /*text-align: center;*/
+}
+
+.drop-lists {
+    display: flex;
+    justify-content: space-around;
+}

@@ -2,10 +2,13 @@
 
 namespace app\controllers;
 
-
+use Yii;
 use app\models\tables\Tasks;
+use app\models\tables\TaskStatuses;
+use app\models\tables\Users;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class TaskController extends Controller
 {
@@ -23,11 +26,61 @@ class TaskController extends Controller
     }
 
     /**
-     * Displays a task preview.
-     * @param $id
+     * Displays a single Tasks model.
+     * @param int $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionOne($id)
+    public function actionOne(int $id)
     {
-        var_dump($id); exit;
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['one', 'id' => $model->id]);
+        }
+
+        return $this->render('task_view', [
+            'model' => $this->findModel($id),
+            'users' => $this->getUsers(),
+            'statuses' => $this->getTaskStatuses()
+        ]);
+    }
+
+    /**
+     * Finds the Tasks model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id
+     * @return Tasks|null
+     * @throws NotFoundHttpException
+     */
+    protected function findModel(int $id)
+    {
+        if (($model = Tasks::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @return array
+     */
+    private function getTaskStatuses()
+    {
+        return TaskStatuses::find()
+            ->select(['name'])
+            ->indexBy('id')
+            ->column();
+    }
+
+    /**
+     * @return array
+     */
+    private function getUsers()
+    {
+        return Users::find()
+            ->select(['name'])
+            ->indexBy('id')
+            ->column();
     }
 }
