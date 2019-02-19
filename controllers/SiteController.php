@@ -39,11 +39,11 @@ class SiteController extends Controller
             ],
             'pageCache' => [
                 'class' => PageCache::class,
-                'only' => ['contact'],
+                'only' => ['about'],
             ],
             'httpCache' => [
                 'class' => HttpCache::class,
-                'only' => ['contact'],
+                'only' => ['about'],
                 'lastModified' => function () {
                     return date('Y-m-d'); // для примера, пока ничего лучше нет
                 }
