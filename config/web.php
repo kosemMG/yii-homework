@@ -4,6 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+    'language' => 'ru',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'taskMessenger'],
@@ -13,6 +14,14 @@ $config = [
         '@img' => '@app/web/img'
     ],
     'components' => [
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@app/messages'
+                ]
+            ]
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'kGRHh2wOCzrJoGmcLJ2_GrXFYuscpZuO',

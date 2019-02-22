@@ -48,3 +48,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.lang {
+    list-style-type: none;
+    display:flex;
+    justify-content: flex-end;
+}

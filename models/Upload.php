@@ -34,6 +34,14 @@ class Upload extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'file' => Yii::t('app', 'file')
+        ];
+    }
+
+
     /**
      * The class main method.
      */

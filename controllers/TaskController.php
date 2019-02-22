@@ -41,8 +41,10 @@ class TaskController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionOne(int $id)
+    public function actionOne(int $id, string $language = 'en')
     {
+        Yii::$app->language = $language;
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

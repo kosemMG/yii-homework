@@ -9,11 +9,21 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+?>
 
+<div>
+    <ul class="lang">
+        <li><?= Html::a('en', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id,'language' => 'en'])) ?></li>
+        <li>&nbsp;</li>
+        <li><?= Html::a('ru', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id,'language' => 'ru'])) ?></li>
+    </ul>
+</div>
+
+<?php
 $this->title = 'Update Tasks: ' . $taskModel->title;
-$this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'tasks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $taskModel->title;
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app', 'update');
 
 ?>
 
@@ -34,7 +44,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $form->field($taskModel, 'description')->textarea(['maxlength' => true]) ?>
 
     <div class="form-group task-buttons">
-        <?= Html::submitButton('Update', ['class' => 'btn btn-success']) ?>
+        <?php $buttonName = Yii::t('app', 'update');
+        echo Html::submitButton($buttonName, ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -49,7 +60,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $uploadForm->field($uploadModel, 'file')->fileInput(); ?>
 
     <div class="form-group task-buttons">
-        <?= Html::submitButton('Attach', ['class' => 'btn btn-success']); ?>
+        <?php $buttonName = Yii::t('app', 'attach');
+        echo Html::submitButton($buttonName, ['class' => 'btn btn-success']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>
