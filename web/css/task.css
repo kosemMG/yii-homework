@@ -43,3 +43,8 @@
 #tasksearch-created_at_month     {
     width: 140px;
 }
+
+.task-buttons {
+    display: flex;
+    justify-content: space-between;
+}

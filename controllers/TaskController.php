@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\filters\TaskSearch;
+use app\models\tables\TaskFiles;
+use app\models\Upload;
 use Yii;
 use app\models\tables\Tasks;
 use app\models\tables\TaskStatuses;
@@ -10,6 +12,7 @@ use app\models\tables\Users;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class TaskController extends Controller
 {
@@ -43,14 +46,39 @@ class TaskController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['one', 'id' => $model->id]);
+            return $this->redirect([
+                'one',
+                'id' => $model->id
+            ]);
         }
 
         return $this->render('task_view', [
-            'model' => $this->findModel($id),
+            'taskModel' => $this->findModel($id),
+            'uploadModel' => new Upload(),
             'users' => $this->getUsers(),
             'statuses' => $this->getTaskStatuses()
         ]);
+    }
+
+    public function actionUpload(int $id)
+    {
+        $uploadModel = new Upload();
+        if ($uploadModel->load(Yii::$app->request->post())) {
+            $uploadModel->file = UploadedFile::getInstance($uploadModel, 'file');
+
+            $filename = $uploadModel->run();
+
+            $model = new TaskFiles();
+            $model->setAttributes([
+                'task_id' => $id,
+                'path' => Yii::getAlias("@web/img/{$filename}"),
+                'path_small' => Yii::getAlias("@web/img/small/{$filename}")
+            ]);
+
+            $model->save();
+
+            return $this->redirect(Yii::$app->request->referrer);
+        }
     }
 
     /**

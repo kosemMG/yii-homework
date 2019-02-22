@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use DateTime;
 
 /**
  * This is the model class for table "tasks".
@@ -21,8 +22,9 @@ use yii\db\Expression;
  * @property TaskStatuses $status
  * @property Users $creator
  * @property Users $executor
- * @property \DateTime created_at
- * @property \DateTime updated_at
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ * @property TaskFiles[] $files
  */
 class Tasks extends ActiveRecord
 {
@@ -99,5 +101,13 @@ class Tasks extends ActiveRecord
     public function getExecutor()
     {
         return $this->hasOne(Users::class, ['id' => 'executor_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(TaskFiles::class, ['task_id' => 'id']);
     }
 }
