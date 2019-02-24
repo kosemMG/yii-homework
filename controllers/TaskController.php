@@ -63,6 +63,11 @@ class TaskController extends Controller
         ]);
     }
 
+    /**
+     * Uploads, saves and attaches a file to the task.
+     * @param int $id
+     * @return bool|\yii\web\Response
+     */
     public function actionUpload(int $id)
     {
         $uploadModel = new Upload();
@@ -86,6 +91,9 @@ class TaskController extends Controller
         return false;
     }
 
+    /**
+     * Adds a comment to the task
+     */
     public function actionAddComment()
     {
         $model = new TaskComments();
