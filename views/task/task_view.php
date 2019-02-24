@@ -15,14 +15,6 @@ use yii\helpers\Url;
 
 ?>
 
-<div>
-    <ul class="lang">
-        <li><?= Html::a('en', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id, 'language' => 'en'])) ?></li>
-        <li>&nbsp;</li>
-        <li><?= Html::a('ru', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id, 'language' => 'ru'])) ?></li>
-    </ul>
-</div>
-
 <?php
 $this->title = 'Update Tasks: ' . $taskModel->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'tasks'), 'url' => ['index']];

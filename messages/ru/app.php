@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'appName' => 'Мое приложение',
+    'language' => 'Язык',
     'home' => 'Домой',
     'about' => 'О нас',
     'contact' => 'Контакты',

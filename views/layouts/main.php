@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -43,7 +44,7 @@ AppAsset::register($this);
             ['label' => Yii::t('app', 'about'), 'url' => ['/site/about']],
             ['label' => Yii::t('app', 'contact'), 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => Yii::t('app', 'login'), 'url' => ['/site/login']]
+            ['label' => Yii::t('app', 'login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -54,6 +55,10 @@ AppAsset::register($this);
                 . Html::endForm()
                 . '</li>'
             ),
+            ['label' => Yii::t('app', 'language'), 'items' => [
+                ['label' => 'en', 'url' => ['site/lang', 'lang' => 'en']],
+                ['label' => 'ru', 'url' => ['site/lang', 'lang' => 'ru']],
+            ]]
         ],
     ]);
     NavBar::end();

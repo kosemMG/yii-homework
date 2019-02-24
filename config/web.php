@@ -7,7 +7,7 @@ $config = [
     'language' => 'en',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'taskMessenger'],
+    'bootstrap' => ['log', 'language', 'taskMessenger'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -70,6 +70,9 @@ $config = [
         */
         'taskMessenger' => [
             'class' => \app\models\components\TaskMessengerComponent::class
+        ],
+        'language' => [
+            'class' => \app\models\components\LanguageComponent::class
         ]
     ],
     'params' => $params,

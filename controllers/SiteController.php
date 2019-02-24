@@ -77,6 +77,12 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionLang($lang)
+    {
+        Yii::$app->session->set('lang', $lang);
+        $this->redirect(Yii::$app->request->referrer);
+    }
+
     /**
      * Login action.
      *
