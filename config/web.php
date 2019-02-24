@@ -60,14 +60,14 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'tasks' => 'task/index',
+                'task/<id:\d+>' => 'task/one'
             ],
         ],
-        */
         'taskMessenger' => [
             'class' => \app\models\components\TaskMessengerComponent::class
         ],
