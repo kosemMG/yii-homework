@@ -56,10 +56,13 @@ class Upload extends Model
             Image::thumbnail($filepath, 100, 100)
                 ->save(Yii::getAlias("@img/small/{$filename}"));
 
-            return $filename;
-        }
+            Yii::$app->session->setFlash('success', Yii::t('app', 'file-success'));
 
-        return false;
+            return $filename;
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'file-error'));
+            return false;
+        }
     }
 
     /**

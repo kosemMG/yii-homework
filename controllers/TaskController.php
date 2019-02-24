@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\filters\TaskSearch;
+use app\models\tables\TaskComments;
 use app\models\tables\TaskFiles;
 use app\models\Upload;
 use Yii;
@@ -38,6 +39,7 @@ class TaskController extends Controller
     /**
      * Displays a single Tasks model.
      * @param int $id
+     * @param string $language
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -48,15 +50,17 @@ class TaskController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect([
-                'one',
-                'id' => $model->id
-            ]);
+            Yii::$app->session->setFlash('success', Yii::t('app', 'task-update-success'));
+            return $this->redirect(['one', 'id' => $model->id]);
+        } else {
+//            Yii::$app->session->setFlash('error', Yii::t('app', 'task-update-error'));
         }
 
         return $this->render('task_view', [
             'taskModel' => $this->findModel($id),
             'uploadModel' => new Upload(),
+            'taskCommentForm' => new TaskComments(),
+            'userId' => Yii::$app->user->id,
             'users' => $this->getUsers(),
             'statuses' => $this->getTaskStatuses()
         ]);
@@ -81,6 +85,21 @@ class TaskController extends Controller
 
             return $this->redirect(Yii::$app->request->referrer);
         }
+        
+        return false;
+    }
+
+    public function actionAddComment()
+    {
+        $model = new TaskComments();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'comment-success'));
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('app', 'comment-error'));
+        }
+
+        $this->redirect(Yii::$app->request->referrer);
     }
 
     /**

@@ -3,19 +3,23 @@
 /**
  * @var \app\models\tables\Tasks $taskModel
  * @var \app\models\Upload $uploadModel
+ * @var \app\models\tables\TaskComments $taskCommentForm
+ * @var integer $userId
  * @var array $statuses
  * @var array $users
  */
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 ?>
 
 <div>
     <ul class="lang">
-        <li><?= Html::a('en', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id,'language' => 'en'])) ?></li>
+        <li><?= Html::a('en', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id, 'language' => 'en'])) ?></li>
         <li>&nbsp;</li>
-        <li><?= Html::a('ru', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id,'language' => 'ru'])) ?></li>
+        <li><?= Html::a('ru', \yii\helpers\Url::to(['task/one', 'id' => $taskModel->id, 'language' => 'ru'])) ?></li>
     </ul>
 </div>
 
@@ -50,6 +54,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'update');
 
     <?php ActiveForm::end(); ?>
 
+    <hr>
+
     <?php $uploadForm = ActiveForm::begin([
         'action' => [
             'upload',
@@ -66,11 +72,32 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'update');
 
     <?php ActiveForm::end(); ?>
 
-
     <div class="task-files">
         <?php foreach ($taskModel->files as $file): ?>
             <a target="_blank" href="<?= $file->path; ?>"><img src="<?= $file->path_small; ?>" alt=""></a>
         <?php endforeach; ?>
     </div>
+
+    <hr>
+
+    <div class="add-comments">
+        <h3><?= Yii::t('app', 'comments') ?></h3>
+
+        <div class="comments">
+            <?php foreach ($taskModel->comments as $comment): ?>
+                <p><strong><?= $comment->user->name ?>:</strong></p>
+                <p><?= $comment->content ?></p>
+            <?php endforeach; ?>
+        </div>
+
+        <?php $form = ActiveForm::begin(['action' => Url::to(['task/add-comment'])]); ?>
+        <?= $form->field($taskCommentForm, 'user_id')->hiddenInput(['value' => $userId])->label(false); ?>
+        <?= $form->field($taskCommentForm, 'task_id')->hiddenInput(['value' => $taskModel->id])->label(false); ?>
+        <?= $form->field($taskCommentForm, 'content')->textarea(); ?>
+        <?= Html::submitButton(Yii::t('app', 'add'), ['class' => 'btn btn-success']) ?>
+        <?php ActiveForm::end(); ?>
+    </div>
+
+
 
 </div>

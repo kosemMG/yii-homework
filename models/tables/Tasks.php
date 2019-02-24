@@ -25,6 +25,7 @@ use DateTime;
  * @property DateTime $created_at
  * @property DateTime $updated_at
  * @property TaskFiles[] $files
+ * @property TaskComments[] $comments
  */
 class Tasks extends ActiveRecord
 {
@@ -109,5 +110,13 @@ class Tasks extends ActiveRecord
     public function getFiles()
     {
         return $this->hasMany(TaskFiles::class, ['task_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(TaskComments::class, ['task_id' => 'id']);
     }
 }
