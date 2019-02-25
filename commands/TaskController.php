@@ -3,8 +3,7 @@
 namespace app\commands;
 
 
-use app\models\Mailer;
-use Yii;
+use app\helpers\Mailer;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\Console;
@@ -35,7 +34,7 @@ class TaskController extends Controller
             }
         }
 
-        $this->stdout("Notifications successfully sent.\n", Console::FG_GREEN, Console::BOLD);
+        $this->stdout("Notification(s) successfully sent.\n", Console::FG_GREEN, Console::BOLD);
         return ExitCode::OK;
     }
 }
