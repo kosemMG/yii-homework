@@ -11,6 +11,10 @@ use yii\base\Model;
  */
 class Mailer extends Model
 {
+    const SEND_SUCCESS = "Notification(s) successfully sent.\n";
+    const SEND_ERROR = "Error occurred!\n";
+    const TASKS_NOT_FOUND = "There is no tasks that are going to expire.\n";
+
     /**
      * Gets a prepared data array from DB.
      * @return array

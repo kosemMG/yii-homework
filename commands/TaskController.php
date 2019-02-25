@@ -20,7 +20,11 @@ class TaskController extends Controller
      */
     public function actionNotify()
     {
-        $tasks = Mailer::getTasks();
+        if (!$tasks = Mailer::getTasks()) {
+            $this->stdout(Mailer::TASKS_NOT_FOUND, Console::FG_CYAN, Console::BOLD);
+            return ExitCode::OK;
+        }
+
         $subject = 'Hurry up!';
 
         foreach ($tasks as $task) {
@@ -29,12 +33,12 @@ class TaskController extends Controller
                 on {$task['due_date']}. \nPlease, follow to {$taskReference} and finish it.\n";
 
             if (!Mailer::notify($task['email'], $subject, $message)) {
-                $this->stdout("Error occurred!\n", Console::FG_RED, Console::BOLD);
+                $this->stdout(Mailer::SEND_ERROR, Console::FG_RED, Console::BOLD);
                 return ExitCode::UNSPECIFIED_ERROR;
             }
         }
 
-        $this->stdout("Notification(s) successfully sent.\n", Console::FG_GREEN, Console::BOLD);
+        $this->stdout(Mailer::SEND_SUCCESS, Console::FG_GREEN, Console::BOLD);
         return ExitCode::OK;
     }
 }
