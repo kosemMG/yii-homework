@@ -2,7 +2,8 @@
 
 namespace app\commands;
 
-
+use app\models\console\ExpireTasksData;
+use Yii;
 use app\helpers\Mailer;
 use yii\console\Controller;
 use yii\console\ExitCode;
@@ -20,7 +21,7 @@ class TaskController extends Controller
      */
     public function actionNotify()
     {
-        if (!$tasks = Mailer::getTasks()) {
+        if (!$tasks = (new ExpireTasksData())->getTasks()) {
             $this->stdout(Mailer::TASKS_NOT_FOUND, Console::FG_CYAN, Console::BOLD);
             return ExitCode::OK;
         }
@@ -41,4 +42,6 @@ class TaskController extends Controller
         $this->stdout(Mailer::SEND_SUCCESS, Console::FG_GREEN, Console::BOLD);
         return ExitCode::OK;
     }
+
+
 }
