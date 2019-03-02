@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ec66b1303a23cbcece55d3445d78035",
+    "content-hash": "0225a2c9f5b16745ebe4c91bb260228f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -235,6 +235,54 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "githubjeka/yii2-gui-rbac",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/githubjeka/gui-rbac-yii2.git",
+                "reference": "e3b940f2bf1ee463a3f4ad100e466180679deb96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/githubjeka/gui-rbac-yii2/zipball/e3b940f2bf1ee463a3f4ad100e466180679deb96",
+                "reference": "e3b940f2bf1ee463a3f4ad100e466180679deb96",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "yiisoft/yii2": ">=2.0.6",
+                "yiisoft/yii2-bootstrap": ">=2.0.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "githubjeka\\rbac\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evgeniy Tkachenko",
+                    "email": "et.coder@gmail.com",
+                    "homepage": "https://github.com/githubjeka"
+                }
+            ],
+            "description": "Yii 2 RBAC management GUI interface",
+            "homepage": "https://github.com/githubjeka/gui-rbac-yii2",
+            "keywords": [
+                "gui",
+                "rbac",
+                "yii2"
+            ],
+            "time": "2019-01-29T11:23:04+00:00"
         },
         {
             "name": "imagine/imagine",

@@ -14,6 +14,9 @@ $config = [
         '@img' => '@app/web/img'
     ],
     'components' => [
+        'authManager' => [
+            'class' => \yii\rbac\DbManager::class
+        ],
         'i18n' => [
             'translations' => [
                 'app' => [
@@ -76,6 +79,20 @@ $config = [
         ]
     ],
     'params' => $params,
+    'modules' => [
+        'rbac' => [
+            'class' => 'githubjeka\rbac\Module',
+            'as access' => [ // if you need to set access
+                'class' => 'yii\filters\AccessControl',
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'] // all auth users
+                    ],
+                ]
+            ]
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
