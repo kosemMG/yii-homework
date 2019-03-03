@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\tables\Users;
 use app\models\filters\UserSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,6 +21,16 @@ class AdminUserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['admin-task'],
+                        'allow' => true,
+                        'roles' => ['Admin']
+                    ]
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
